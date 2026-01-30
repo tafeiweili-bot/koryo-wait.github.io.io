@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>混雑状況アプリ</title>
+    <script>
+        async function fetchStatus() {
+            const response = await fetch("http://localhost:8000/status");
+            const data = await response.json();
+            document.getElementById("result").innerText =
+                `現在の人数: ${data.people_count}人 → 状況: ${data.status}`;
+        }
+
+        async function sendCount() {
+            const count = document.getElementById("inputCount").value;
+
+            await fetch("http://localhost:8000/update", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({people_count: count})
+            });
+
+            fetchStatus();
+        }
+    </script>
+</head>
+<body>
+    <h1>混雑状況チェック</h1>
+
+    <button onclick="fetchStatus()">更新</button>
+    <p id="result">まだデータはありません</p>
+
+    <h2>人数を入力して更新</h2>
+    <input type="number" id="inputCount" placeholder="人数を入力">
+    <button onclick="sendCount()">送信</button>
+</body>
+</html>
