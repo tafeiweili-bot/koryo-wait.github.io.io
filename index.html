@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>はじめてのサイト</title>
+</head>
+<body>
+
+  <h1>現在の待ち時間</h1>
+  <p id="wait">3分待ち</p>
+
+  <script>
+    let minutes = 3;
+
+    setInterval(() => {
+      if (minutes > 0) {
+        minutes--;
+        document.getElementById("wait").textContent =
+          minutes + "分待ち";
+      } else {
+        document.getElementById("wait").textContent =
+          "ご案内できます";
+      }
+    }, 60000);
+  </script>
+
+</body>
+</html>
