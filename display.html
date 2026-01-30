@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>待ち時間表示</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    }
+
+    .card {
+      background: white;
+      padding: 40px 60px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    #wait {
+      font-size: 28px;
+      font-weight: bold;
+      color: #2c7be5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>現在の待ち時間</h1>
+    <p id="wait"></p>
+  </div>
+
+  <script>
+    const waitElement = document.getElementById("wait");
+
+    function showTime() {
+      const minutes = localStorage.getItem("waitTime");
+
+      if (minutes === null || minutes === "") {
+        waitElement.textContent = "情報がありません";
+      } else {
+        waitElement.textContent = minutes + "分待ち";
+      }
+    }
+
+    showTime();
+
+    // 5秒ごとに自動更新（設定画面の変更を反映）
+    setInterval(showTime, 5000);
+  </script>
+
+</body>
+</html>
